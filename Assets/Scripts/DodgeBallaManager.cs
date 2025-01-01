@@ -19,6 +19,11 @@ namespace DodgeBalla
             {
                 StartButtons();
             }
+            else
+            {
+                StatusLabels();
+                SubmitNewPosition();
+            }
         }
 
         void StartButtons()

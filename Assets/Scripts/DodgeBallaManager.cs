@@ -15,7 +15,7 @@ namespace DodgeBalla
         private void OnGUI()
         {
             GUILayout.BeginArea(new Rect(10, 10, 300, 300));
-            if (m_networkManager.IsClient && !m_networkManager.IsServer)
+            if (!m_networkManager.IsClient && !m_networkManager.IsServer)
             {
                 StartButtons();
             }

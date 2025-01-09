@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8376904197806841855}
   - component: {fileID: 7527963126037178437}
   - component: {fileID: 1196418547299770690}
+  - component: {fileID: 6094926600282320385}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1310921717
+  GlobalObjectIdHash: 2631405980
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -203,3 +204,56 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &6094926600282320385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5932260982915868022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 241dfb8a39c32344e9b3e1686897f78a, type: 3}
+  m_NotificationBehavior: 2
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02d7af40-8045-4a9a-88ca-1627d9049b46
+    m_ActionName: 'M&K/Walk[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5df897a0-d778-42ad-bd90-b884c4ee20a5
+    m_ActionName: 'M&K/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bdfe9c3-b4ea-4bb2-a73b-c63c27427c2f
+    m_ActionName: 'M&K/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c347615e-176a-48ee-a7c2-c155c857f02e
+    m_ActionName: 'M&K/Grab[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50c03062-445b-4f2b-b76d-028749e11529
+    m_ActionName: M&K/Throw
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 59bebb96-2941-47e5-967d-80a1195d317a
+    m_ActionName: 'M&K/New action[/Mouse/leftButton]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: M&K
+  m_DefaultActionMap: M&K
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

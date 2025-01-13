@@ -12,7 +12,8 @@ namespace DodgeBalla
         private Vector2 moveDir = Vector2.zero;
         [Header("Health Settings")]
         public float moveSpeed = 100;
-        public float acceleration = 100; 
+        public float acceleration = 100;
+        private Rigidbody rb;
 
 
         public override void OnNetworkSpawn()
@@ -25,7 +26,7 @@ namespace DodgeBalla
         }
         void Start()
         {
-            
+            rb=GetComponent<Rigidbody>();
         }
 
         // Update is called once per frame
@@ -34,11 +35,6 @@ namespace DodgeBalla
             if (!IsOwner)
             {
                 return;
-            }
-           // transform.position = Position.Value;
-           if (moveDir!=Vector2.zero)
-            {
-
             }
         }
         public void Move()

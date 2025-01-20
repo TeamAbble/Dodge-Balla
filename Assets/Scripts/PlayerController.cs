@@ -2,6 +2,7 @@ using System;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -19,11 +20,18 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private GameObject head;
     [SerializeField] private float clampAngle = 80f;
     [SerializeField] private float lookSpeed = 300f;
-    private Vector3 startRotation; 
+    private Vector3 startRotation;
+    [Header("Combat Settings")]
+    [SerializeField] private float grabDistance = 10f;
+    [SerializeField] private float throwForce = 10f;
+    [SerializeField] private Transform holdLocation;
+    private GameObject heldBall;
     void Start()
     {
         controller = GetComponent<CharacterController>();
         inputManager = GetComponent<InputManager>();
+        inputManager.playerControls.Player.Grab.performed += OnGrab;
+        inputManager.playerControls.Player.Throw.performed += OnThrow;
     }
     public override void OnNetworkSpawn()
     {
@@ -32,6 +40,7 @@ public class PlayerController : NetworkBehaviour
         {
             cam.enabled = false;   
         }
+   
     }
 
 
@@ -53,6 +62,11 @@ public class PlayerController : NetworkBehaviour
 
         playerVelocity.y += gravity*Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+        if (heldBall != null)
+        {
+            heldBall.transform.position = holdLocation.position;
+            
+        }
 
 
     }
@@ -66,5 +80,26 @@ public class PlayerController : NetworkBehaviour
         startRotation.y = Mathf.Clamp(startRotation.y, -clampAngle, clampAngle);
         head.transform.rotation = Quaternion.Euler(-startRotation.y,startRotation.x,0f );
 
+    }
+    void OnGrab(InputAction.CallbackContext context)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(head.transform.position, head.transform.forward,out hit, grabDistance))
+        {
+            if (hit.collider.gameObject.tag == "ball"){
+                heldBall = hit.collider.gameObject;
+                heldBall.GetComponent<Ball>().OnGrabbed();
+            }
+            
+        }
+    }
+    void OnThrow(InputAction.CallbackContext context)
+    {
+        if (heldBall != null)
+        {
+            heldBall.GetComponent<Ball>().OnThrow();
+            heldBall.GetComponent<Rigidbody>().AddForce(head.transform.forward * throwForce);
+            heldBall = null;
+        }
     }
 }

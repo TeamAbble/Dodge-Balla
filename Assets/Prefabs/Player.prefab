@@ -499,7 +499,39 @@ Transform:
   m_Children:
   - {fileID: 654091873019521718}
   - {fileID: 7757248098822559752}
+  - {fileID: 6569901718426073130}
   m_Father: {fileID: 5393641883320255887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3342263427162272174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6569901718426073130}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6569901718426073130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342263427162272174}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6567274002695711629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4290968086988223810
 GameObject:
@@ -908,6 +940,9 @@ MonoBehaviour:
   head: {fileID: 3223717408180746471}
   clampAngle: 80
   lookSpeed: 50
+  grabDistance: 10
+  throwForce: 500
+  holdLocation: {fileID: 6569901718426073130}
 --- !u!143 &5081586635274491314
 CharacterController:
   m_ObjectHideFlags: 0

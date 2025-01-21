@@ -102,4 +102,17 @@ public class PlayerController : NetworkBehaviour
             heldBall = null;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collided");
+        if (other.gameObject.tag == "ball")
+        {
+            Ball ball = other.gameObject.GetComponent<Ball>();
+            Debug.Log("Ball");
+            if (ball.isLive)
+            {
+                Debug.Log("Live Ball");
+            }
+        }
+    }
 }

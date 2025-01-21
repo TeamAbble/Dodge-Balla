@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private bool isLive = false;
+    public bool isLive = false;
     private GameObject playerRef;
     private Collider col;
     void Start()

@@ -24,14 +24,14 @@ public class PlayerController : NetworkBehaviour
     [Header("Combat Settings")]
     [SerializeField] private float grabDistance = 10f;
     [SerializeField] private float throwForce = 10f;
+    [SerializeField] private float throwArc = 1f;
     [SerializeField] private Transform holdLocation;
-    private GameObject heldBall;
+
+    private Ball heldBall;
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        inputManager = GetComponent<InputManager>();
-        inputManager.playerControls.Player.Grab.performed += OnGrab;
-        inputManager.playerControls.Player.Throw.performed += OnThrow;
+        
+        
     }
     public override void OnNetworkSpawn()
     {
@@ -40,7 +40,12 @@ public class PlayerController : NetworkBehaviour
         {
             cam.enabled = false;   
         }
-   
+        controller = GetComponent<CharacterController>();
+        inputManager = GetComponent<InputManager>();
+        inputManager.playerControls.Player.Grab.performed += OnGrab;
+        inputManager.playerControls.Player.Throw.performed += OnThrow;
+        inputManager.playerControls.Player.Jump.performed += OnJump;
+
     }
 
 
@@ -83,24 +88,52 @@ public class PlayerController : NetworkBehaviour
     }
     void OnGrab(InputAction.CallbackContext context)
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         RaycastHit hit;
         if (Physics.Raycast(head.transform.position, head.transform.forward,out hit, grabDistance))
         {
-            if (hit.collider.gameObject.tag == "ball"){
-                heldBall = hit.collider.gameObject;
-                heldBall.GetComponent<Ball>().OnGrabbed();
-            }
+            
+               if (hit.rigidbody!=null&&hit.rigidbody.TryGetComponent(out Ball ball))
+                {
+                    ball.OnGrabbed_Rpc(true);
+                    PickUpBall_Rpc(ball);
+                    heldBall = ball;
+                }
+            
             
         }
+    }
+
+
+    void OnJump(InputAction.CallbackContext context)
+    {
+
+        if (!IsOwner)
+        {
+            return;
+        }
+        playerVelocity.y = 10;
     }
     void OnThrow(InputAction.CallbackContext context)
     {
         if (heldBall != null)
         {
-            heldBall.GetComponent<Ball>().OnThrow();
+          
+            heldBall.GetComponent<Ball>().OnGrabbed_Rpc(false);
             heldBall.GetComponent<Rigidbody>().AddForce(head.transform.forward * throwForce);
+            heldBall.GetComponent<Rigidbody>().AddForce(new Vector3(0,throwArc,0), ForceMode.Impulse);
+
             heldBall = null;
         }
+    }
+    [Rpc(SendTo.Server)]
+    void PickUpBall_Rpc( NetworkBehaviourReference ball)
+    {
+        if (ball.TryGet(out Ball ballComp)&&ballComp.NetworkObject.OwnerClientId != OwnerClientId) { 
+            ballComp.NetworkObject.ChangeOwnership(OwnerClientId);}
     }
     private void OnTriggerEnter(Collider other)
     {

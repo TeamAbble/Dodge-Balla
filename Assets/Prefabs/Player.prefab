@@ -943,6 +943,7 @@ MonoBehaviour:
   lookSpeed: 50
   grabDistance: 10
   throwForce: 500
+  throwArc: 0.5
   holdLocation: {fileID: 6569901718426073130}
 --- !u!143 &5081586635274491314
 CharacterController:

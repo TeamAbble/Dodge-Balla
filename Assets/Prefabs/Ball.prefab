@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1103462025148611034}
   - component: {fileID: 7993312740817544997}
   - component: {fileID: 4829347989457983845}
+  - component: {fileID: -5152222250209027869}
   - component: {fileID: 6344274607360173658}
   - component: {fileID: 2956721573263416944}
   m_Layer: 0
@@ -120,8 +121,8 @@ Rigidbody:
   m_GameObject: {fileID: 4701299483552776269}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Drag: 0.2
+  m_AngularDrag: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -138,6 +139,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5152222250209027869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701299483552776269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3231246870
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &6344274607360173658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +212,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74beb88fb56988246afe491057fc3dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  isLive: 0

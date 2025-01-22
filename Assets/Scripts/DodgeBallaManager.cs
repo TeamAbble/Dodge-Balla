@@ -24,6 +24,8 @@ namespace DodgeBalla
                 StatusLabels();
                 SubmitNewPosition();
             }
+            GUILayout.EndArea();
+           
         }
 
         void StartButtons()

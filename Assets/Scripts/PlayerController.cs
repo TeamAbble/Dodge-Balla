@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,6 +27,12 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwArc = 1f;
     [SerializeField] private Transform holdLocation;
+    [Header("Health Settings")]
+    [SerializeField] private int maxHealth = 3;
+    private int health; 
+    private bool isDead = false;
+    
+    private bool isInvincible=false;
 
     private Ball heldBall;
     void Start()
@@ -45,6 +52,7 @@ public class PlayerController : NetworkBehaviour
         inputManager.playerControls.Player.Grab.performed += OnGrab;
         inputManager.playerControls.Player.Throw.performed += OnThrow;
         inputManager.playerControls.Player.Jump.performed += OnJump;
+        health = maxHealth;
 
     }
 
@@ -115,13 +123,17 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        playerVelocity.y = 10;
+        if (isGrounded)
+        {
+            playerVelocity.y = 10;
+        }
+        
     }
     void OnThrow(InputAction.CallbackContext context)
     {
         if (heldBall != null)
         {
-          
+            heldBall.transform.position=new Vector3(heldBall.transform.position.x,head.transform.position.y,heldBall.transform.position.z);
             heldBall.GetComponent<Ball>().OnGrabbed_Rpc(false);
             heldBall.GetComponent<Rigidbody>().AddForce(head.transform.forward * throwForce);
             heldBall.GetComponent<Rigidbody>().AddForce(new Vector3(0,throwArc,0), ForceMode.Impulse);
@@ -148,4 +160,29 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+    private void UpdateHealth(int change)
+    {
+        health += change;
+        health = Mathf .Clamp(health, 0, maxHealth);
+        if (health <= 0) { Die(); }
+    }
+    private void Die()
+    {
+        isDead = true;
+    }
+    private void Respawn()
+    {
+        isDead = false;
+        health = maxHealth;
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -8,6 +8,7 @@ public class Ball : NetworkBehaviour
     private GameObject playerRef;
     private Collider col;
     private Rigidbody rb;
+    [SerializeField]private Transform podiumRef;
     void Start()
     {
         col = GetComponent<SphereCollider>();

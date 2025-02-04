@@ -1,5 +1,6 @@
 using Unity.Netcode; 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 
@@ -11,6 +12,7 @@ namespace DodgeBalla
         void Awake()
         {
             m_networkManager = GetComponent<NetworkManager>();
+            Debug.Log(SceneManager.GetActiveScene().name);
         }
         private void OnGUI()
         {

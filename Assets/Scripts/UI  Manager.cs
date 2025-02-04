@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -7,9 +8,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject hostJoinMenu;
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject hostMenu;
     private GameObject currentMenu;
 
     [Header("Network Configs")]
+ 
     [SerializeField] private NetworkManager networkManager;
     private void Start()
     {
@@ -38,9 +41,16 @@ public class UIManager : MonoBehaviour
     public void StartHost()
     {
         networkManager.StartHost();
+        currentMenu.SetActive(false);
+        currentMenu=hostMenu;
+        currentMenu.SetActive(true);
     }
     public void startClient()
     {
         networkManager.StartClient();
+    }
+    public void StartBallaDesert()
+    {
+        networkManager.SceneManager.LoadScene("Balla Desert", LoadSceneMode.Single);
     }
 }

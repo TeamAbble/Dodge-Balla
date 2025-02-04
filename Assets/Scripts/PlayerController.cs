@@ -27,12 +27,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwArc = 1f;
     [SerializeField] private Transform holdLocation;
-    [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 3;
-    private int health; 
-    private bool isDead = false;
-    
-    private bool isInvincible=false;
+
+    [Header("Invincibility Settings")]
+    [SerializeField] private float invincibilityTimeInSeconds = 2;
+   
 
     private Ball heldBall;
     void Start()
@@ -52,7 +50,7 @@ public class PlayerController : NetworkBehaviour
         inputManager.playerControls.Player.Grab.performed += OnGrab;
         inputManager.playerControls.Player.Throw.performed += OnThrow;
         inputManager.playerControls.Player.Jump.performed += OnJump;
-        health = maxHealth;
+        
 
     }
 
@@ -160,21 +158,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
-    private void UpdateHealth(int change)
-    {
-        health += change;
-        health = Mathf .Clamp(health, 0, maxHealth);
-        if (health <= 0) { Die(); }
-    }
-    private void Die()
-    {
-        isDead = true;
-    }
-    private void Respawn()
-    {
-        isDead = false;
-        health = maxHealth;
-    }
+    
 }
 
 

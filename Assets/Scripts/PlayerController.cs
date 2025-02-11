@@ -4,12 +4,13 @@ using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : NetworkBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private bool isGrounded;
+    [SerializeField]private bool isGrounded;
     [Header("Movement Settings")]
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
@@ -30,9 +31,12 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Invincibility Settings")]
     [SerializeField] private float invincibilityTimeInSeconds = 2;
-   
 
+    [SerializeField]private CapsuleCollider col;
+    [SerializeField]private float groundCheckDistance = 0.2f;
     private Ball heldBall;
+
+    private int score = 0; 
     void Start()
     {
         
@@ -60,10 +64,19 @@ public class PlayerController : NetworkBehaviour
     {
         if (!IsOwner) return;
         LookAround();
-        isGrounded = controller.isGrounded;
-        if (isGrounded && playerVelocity.y < 0)
+        GroundCheck();
+        if (!isGrounded)
+        {
+            playerVelocity.y += gravity * Time.deltaTime;
+        }
+        else if (playerVelocity.y < 0)
         {
             playerVelocity.y = 0;
+        }
+
+        if(playerVelocity.y != 0)
+        {
+            controller.Move(playerVelocity * Time.deltaTime);
         }
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
@@ -71,8 +84,7 @@ public class PlayerController : NetworkBehaviour
         move.y = 0;
         controller.Move(move*Time.deltaTime*playerSpeed);
 
-        playerVelocity.y += gravity*Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        
         if (heldBall != null)
         {
             heldBall.transform.position = holdLocation.position;
@@ -107,6 +119,8 @@ public class PlayerController : NetworkBehaviour
                     ball.OnGrabbed_Rpc(true);
                     PickUpBall_Rpc(ball);
                     heldBall = ball;
+                    ball.player = this;
+                Debug.Log("grabbed");
                 }
             
             
@@ -145,6 +159,14 @@ public class PlayerController : NetworkBehaviour
         if (ball.TryGet(out Ball ballComp)&&ballComp.NetworkObject.OwnerClientId != OwnerClientId) { 
             ballComp.NetworkObject.ChangeOwnership(OwnerClientId);}
     }
+    [Rpc(SendTo.Server)]
+    void ThrowBall_Rpc(NetworkBehaviourReference ball)
+    {
+        if (ball.TryGet(out Ball ballComp)&&ballComp.NetworkObject.OwnerClientId == OwnerClientId)
+        {
+            ballComp.NetworkObject.RemoveOwnership();
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("collided");
@@ -157,6 +179,27 @@ public class PlayerController : NetworkBehaviour
                 Debug.Log("Live Ball");
             }
         }
+    }
+    private void GroundCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), Vector3.down, out hit, groundCheckDistance))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded= false;  
+        }
+       
+    }
+    public void AddScore(int scoreAdded) {
+        if (!IsOwner)
+        {
+            return;
+        }
+        score += scoreAdded;
+        Debug.Log("Score added, new score is: " + score);
     }
     
 }

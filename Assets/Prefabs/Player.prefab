@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 5506646340909890635}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -895,6 +895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: 0}
   m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -971,6 +972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  isGrounded: 0
   playerSpeed: 10
   jumpHeight: 1
   gravity: -9.81
@@ -979,10 +981,12 @@ MonoBehaviour:
   clampAngle: 80
   lookSpeed: 50
   grabDistance: 10
-  throwForce: 2000
+  throwForce: 800
   throwArc: 0.5
   holdLocation: {fileID: 6569901718426073130}
-  maxHealth: 3
+  invincibilityTimeInSeconds: 2
+  col: {fileID: 4936963710443567762}
+  groundCheckDistance: 0.2
 --- !u!143 &5081586635274491314
 CharacterController:
   m_ObjectHideFlags: 0

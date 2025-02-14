@@ -31,6 +31,8 @@ public class Ball : NetworkBehaviour
         isLive = !isGrabbed;
         col.enabled = !isGrabbed;
         rb.isKinematic = isGrabbed;
+        rb.angularVelocity=Vector3.zero;
+        rb.linearVelocity=Vector3.zero;
         numberOfBounces = maxNumberOfBounces;
         CancelInvoke();
     }
@@ -47,7 +49,7 @@ public class Ball : NetworkBehaviour
                 Invoke("ReturnToPodium", 10f);
             }
             Debug.Log("Ball Bounced, Bounces Remaining: " + numberOfBounces + " Is Ball Live: "+ isLive);
-            if (player = null) { return; }
+            if (player == null) { return; }
             if (collision.gameObject.tag == "Player"&&collision.gameObject!=player.gameObject)
             {
                 isLive = false;

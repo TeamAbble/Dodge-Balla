@@ -8,12 +8,13 @@ public class Ball : NetworkBehaviour
     public bool isLive = false;
     public PlayerController player;
     private Collider col;
-    private Rigidbody rb;
+    public Rigidbody rb;
     [SerializeField] private int maxNumberOfBounces=2;
     private int numberOfBounces;
     public Podium podiumRef;
-    void Start()
+    public override void OnNetworkSpawn()
     {
+        Debug.Log(OwnerClientId);
         col = GetComponent<SphereCollider>();
         col.enabled = true;
         rb = GetComponent<Rigidbody>();
@@ -28,11 +29,13 @@ public class Ball : NetworkBehaviour
     [Rpc(SendTo.Everyone)]
     public void OnGrabbed_Rpc(bool isGrabbed)
     {
+        
+        Debug.Log("Ball's owner is : "+OwnerClientId);
+        Debug.Log("got it");
         isLive = !isGrabbed;
         col.enabled = !isGrabbed;
         rb.isKinematic = isGrabbed;
-        rb.angularVelocity=Vector3.zero;
-        rb.linearVelocity=Vector3.zero;
+        
         numberOfBounces = maxNumberOfBounces;
         CancelInvoke();
     }

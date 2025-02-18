@@ -87,7 +87,15 @@ public class PlayerController : NetworkBehaviour
         
         if (heldBall != null)
         {
-            heldBall.transform.position = holdLocation.position;
+            if (heldBall.OwnerClientId != OwnerClientId)
+            {
+                Debug.Log("isn't owned by this player");
+                Debug.Log("HeldBall's owner is: " +heldBall.OwnerClientId);
+                return;
+                
+            }
+            heldBall.rb.MovePosition(holdLocation.position);
+            Debug.Log(heldBall.rb.isKinematic);
             
         }
 
@@ -116,8 +124,10 @@ public class PlayerController : NetworkBehaviour
             
                if (hit.rigidbody!=null&&hit.rigidbody.TryGetComponent(out Ball ball))
                 {
-                    ball.OnGrabbed_Rpc(true);
                     PickUpBall_Rpc(ball);
+                    Debug.Log("GoddaBall");
+                    ball.OnGrabbed_Rpc(true);
+                    
                     heldBall = ball;
                     ball.player = this;
                 Debug.Log("grabbed");
@@ -156,8 +166,17 @@ public class PlayerController : NetworkBehaviour
     [Rpc(SendTo.Server)]
     void PickUpBall_Rpc( NetworkBehaviourReference ball)
     {
+        
+        Debug.Log("I now own a ball");
         if (ball.TryGet(out Ball ballComp)&&ballComp.NetworkObject.OwnerClientId != OwnerClientId) { 
-            ballComp.NetworkObject.ChangeOwnership(OwnerClientId);}
+            ballComp.NetworkObject.ChangeOwnership(OwnerClientId);Debug.Log("succeeded");
+            ballComp.OnGrabbed_Rpc(true);
+        }
+        
+        else
+        {
+            Debug.Log("failed");
+        }
     }
     [Rpc(SendTo.Server)]
     void ThrowBall_Rpc(NetworkBehaviourReference ball)

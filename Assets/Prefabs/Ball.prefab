@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7993312740817544997}
   - component: {fileID: 4829347989457983845}
   - component: {fileID: -5152222250209027869}
-  - component: {fileID: 6344274607360173658}
   - component: {fileID: 2956721573263416944}
-  - component: {fileID: 6150670474241363003}
+  - component: {fileID: 2737656936692199072}
+  - component: {fileID: 4778874972241367908}
   m_Layer: 0
   m_Name: Ball
   m_TagString: ball
@@ -83,7 +83,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &-5152222250209027869
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3231246870
+  GlobalObjectIdHash: 2616824247
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -111,7 +111,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &6344274607360173658
+--- !u!114 &2956721573263416944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,12 +120,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 4701299483552776269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 74beb88fb56988246afe491057fc3dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 0
-  AuthorityMode: 1
+  isLive: 0
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  maxNumberOfBounces: 2
+  podiumRef: {fileID: 0}
+--- !u!114 &2737656936692199072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701299483552776269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761e6a54ad014694b9a58aa1c87b9138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 1
+  AuthorityMode: 0
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -147,24 +165,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 0
   SlerpPosition: 0
---- !u!114 &2956721573263416944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701299483552776269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74beb88fb56988246afe491057fc3dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isLive: 0
-  player: {fileID: 0}
-  maxNumberOfBounces: 2
-  podiumRef: {fileID: 0}
---- !u!114 &6150670474241363003
+--- !u!114 &4778874972241367908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

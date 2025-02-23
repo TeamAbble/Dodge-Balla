@@ -29,12 +29,16 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float throwArc = 1f;
     [SerializeField] private Transform holdLocation;
 
-    [Header("Invincibility Settings")]
+    [Header("Health Settings")]
+    [SerializeField] private int maxHealth = 5;
+    private int health;
+    [SerializeField] private float respawnTime = 5f; 
     [SerializeField] private float invincibilityTimeInSeconds = 2;
 
     [SerializeField]private CapsuleCollider col;
     [SerializeField]private float groundCheckDistance = 0.2f;
     private Ball heldBall;
+    public bool dead = false;
 
     private int score = 0; 
     void Start()
@@ -54,6 +58,7 @@ public class PlayerController : NetworkBehaviour
         inputManager.playerControls.Player.Grab.performed += OnGrab;
         inputManager.playerControls.Player.Throw.performed += OnThrow;
         inputManager.playerControls.Player.Jump.performed += OnJump;
+        health=maxHealth;
         
 
     }
@@ -147,7 +152,7 @@ public class PlayerController : NetworkBehaviour
         }
         if (isGrounded)
         {
-            playerVelocity.y = 10;
+            playerVelocity.y = jumpHeight;
         }
         
     }
@@ -219,6 +224,28 @@ public class PlayerController : NetworkBehaviour
         }
         score += scoreAdded;
         Debug.Log("Score added, new score is: " + score);
+    }
+
+    public void ChangeHealth(int change)
+    {
+        if (dead) { return; }
+        health += change;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        if (health == 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        
+        Debug.Log("Dead");
+        Invoke("Revive", respawnTime);
+    }
+    private void Revive()
+    {
+        Debug.Log("Revived");
+        health = maxHealth;
     }
     
 }

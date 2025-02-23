@@ -12,7 +12,7 @@ public class Podium : NetworkBehaviour
         {
             return;
         }
-        SpawnBall();
+        Invoke("SpawnBall",5f);
     }
     public void SpawnBall()
     {

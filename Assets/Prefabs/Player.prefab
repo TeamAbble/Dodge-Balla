@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8797342269146210029}
   - component: {fileID: 793115624956402528}
   - component: {fileID: 4149768900979929511}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99273502708882059}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 4557411947794970458}
   - component: {fileID: 6203389257224147586}
   - component: {fileID: 2686059216876653126}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 3803041260873458158}
   - component: {fileID: 8417035554889029265}
   - component: {fileID: 2179148857291902683}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eyeball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 5078012501508303696}
   - component: {fileID: 4464307228288300894}
   - component: {fileID: 1264354850114956443}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DeadHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 4889329902671325310}
   - component: {fileID: 8494891369753184488}
   - component: {fileID: 366604810291794460}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 9040447589639441174}
   - component: {fileID: 6558053111903842175}
   - component: {fileID: 2376919320864991877}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 1630926664878404971}
   - component: {fileID: 9190655542403223731}
   - component: {fileID: 926568946870667383}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DeadBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6567274002695711629}
   - component: {fileID: 2047863130203097636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6569901718426073130}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 4741637297996032247}
   - component: {fileID: 4692458518991273940}
   - component: {fileID: 8538850283399220509}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 5650840524748656519}
   - component: {fileID: 6771545515337260334}
   - component: {fileID: 7947394453166059552}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 9164001582312105336}
   - component: {fileID: 5081586635274491314}
   - component: {fileID: 5506646340909890635}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1161,9 +1161,12 @@ MonoBehaviour:
   throwForce: 800
   throwArc: 0.5
   holdLocation: {fileID: 6569901718426073130}
+  maxHealth: 5
+  respawnTime: 5
   invincibilityTimeInSeconds: 2
   col: {fileID: 4936963710443567762}
   groundCheckDistance: 0.2
+  dead: 0
 --- !u!143 &5081586635274491314
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1223,7 +1226,7 @@ GameObject:
   - component: {fileID: 4847268853519018308}
   - component: {fileID: 7474800794391588449}
   - component: {fileID: 9206005879199183287}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1309,7 +1312,7 @@ GameObject:
   - component: {fileID: 2906968816020759926}
   - component: {fileID: 7311803123217849650}
   - component: {fileID: 3902414545737577959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Shoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 654091873019521718}
   - component: {fileID: 6527402145232997713}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CinemachineCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1472,7 +1475,7 @@ GameObject:
   - component: {fileID: 7757248098822559752}
   - component: {fileID: 1592235438383823116}
   - component: {fileID: 4658841926555682107}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

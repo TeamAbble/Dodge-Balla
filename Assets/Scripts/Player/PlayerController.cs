@@ -35,7 +35,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float respawnTime = 5f; 
     [SerializeField] private float invincibilityTimeInSeconds = 2;
 
-    [SerializeField]private CapsuleCollider col;
     [SerializeField]private float groundCheckDistance = 0.2f;
     private Ball heldBall;
     public bool dead = false;
@@ -191,23 +190,11 @@ public class PlayerController : NetworkBehaviour
             ballComp.NetworkObject.RemoveOwnership();
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("collided");
-        if (other.gameObject.tag == "ball")
-        {
-            Ball ball = other.gameObject.GetComponent<Ball>();
-            Debug.Log("Ball");
-            if (ball.isLive)
-            {
-                Debug.Log("Live Ball");
-            }
-        }
-    }
+
     private void GroundCheck()
     {
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), Vector3.down, out hit, groundCheckDistance))
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x, controller.bounds.min.y, controller.bounds.center.z), Vector3.down, out hit, groundCheckDistance))
         {
             isGrounded = true;
         }

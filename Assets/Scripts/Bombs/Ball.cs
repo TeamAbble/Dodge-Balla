@@ -11,6 +11,7 @@ public class Ball : NetworkBehaviour
     public Rigidbody rb;
     [SerializeField] private int maxNumberOfBounces = 2;
     [SerializeField] private Collider blastTrigger;
+    [SerializeField] private ParticleSystem particles;
     private int numberOfBounces;
     public Podium podiumRef;
     public int damage = 1;
@@ -81,6 +82,7 @@ public class Ball : NetworkBehaviour
     private void Explode_Rpc()
     {
         blast.SetActive(true);
+        particles.Play();
         Invoke("ReturnToPodium", 0.5f);
     }
     public void ExplosiveHit(GameObject other)
